@@ -9,6 +9,7 @@ transport:
 provisioner:
   name: dokken
   chef_license: accept
+  clean_dokken_sandbox: false
 
 verifier:
   name: inspec
