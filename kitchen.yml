@@ -1,0 +1,40 @@
+---
+driver:
+  name: dokken
+  privileged: true
+
+transport:
+  name: dokken
+
+provisioner:
+  name: dokken
+  chef_license: accept
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: debian-10
+    driver:
+      image: dokken/debian-10
+      pid_one_command: /bin/systemd
+      intermediate_instructions:
+        - RUN /usr/bin/apt-get update
+
+suites:
+  - name: chef16
+    driver:
+      chef_version: 16
+    verifier:
+      inspec_tests:
+        - test/integration/default
+    attributes:
+
+  - name: chef17
+    driver:
+      chef_version: 17
+    verifier:
+      inspec_tests:
+        - test/integration/default
+    attributes:
+
